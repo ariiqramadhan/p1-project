@@ -3,13 +3,19 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "db": "npx sequelize db:drop && npx sequelize db:create",
+    "migNoFK": "npx sequelize db:migrate --name 20240717125445-create-user && npx sequelize db:migrate --name 20240717125451-create-city && npx sequelize db:migrate --name 20240717125455-create-category && npx sequelize db:migrate --name 20240717125500-create-product",
+    "migrate": "npx sequelize db:migrate",
+    "seed": "npx sequelize db:seed:all",
+    "reset": "npm run db && npm run migNoFK && npm run migrate && npm run seed"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "ejs": "^3.1.10",
     "express": "^4.19.2",
     "pg": "^8.12.0",
