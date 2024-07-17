@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Transaction.belongsTo(models.User);
+      Transaction.belongsToMany(models.Product, { through: models.TransactionProduct });
     }
   }
   Transaction.init({
