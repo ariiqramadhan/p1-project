@@ -1,4 +1,4 @@
-const formatPrice = require('../helpers/helper');
+const { formatPrice } = require('../helpers/helper');
 const { Product, Category, ProductCategory } = require('../models/index');
 
 class Controller {

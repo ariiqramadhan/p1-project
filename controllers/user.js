@@ -1,7 +1,6 @@
 const { Product, Category, UserDetail, City, User } = require('../models/index');
-const formatPrice = require('../helpers/helper');
-const { writeFile } = require('fs').promises;
-const easyinvoice = require('easyinvoice');
+const { formatPrice, generateInvoice } = require('../helpers/helper');
+const { Op } = require('sequelize');
 
 class Controller {
     static async home(req, res) {
@@ -10,15 +9,16 @@ class Controller {
             if (req.session.user.id !== +userId || req.session.user.role !== userRole) {
                 return res.redirect(`/${req.session.user.id}/${req.session.user.role}`)
             }
-            const products = await Product.findAll();
-            // switch (req.session.user.role) {
-            //     case 'admin':
-            //         res.render('admin', { user: req.session.user, products, formatPrice });
-            //         break;
-            //     case 'user':
-            //         res.render('user', { user: req.session.user });
-            //         break;
-            // }
+            const products = await Product.findAll({
+                order: [
+                    ['id']
+                ],
+                where: {
+                    stock: {
+                        [Op.gt]: 0
+                    }
+                }
+            });
             res.render('home', { user: req.session.user, products, formatPrice });
         } catch (err) {
             res.send(err);
@@ -109,51 +109,21 @@ class Controller {
                     }
                 }
             });
-            const data = {
-                apiKey: "free", // Please register to receive a production apiKey: https://app.budgetinvoice.com/register
-                mode: "development", // Production or development, defaults to production   
-                images: {
-                    // The logo on top of your invoice
-                    logo: "https://public.budgetinvoice.com/img/logo_en_original.png",
-                },
-                // Your own data
-                sender: {
-                    company: "Toko Kocak",
-                    address: "Jl. Jalan Sampai Kelar",
-                    zip: "SBY-06",
-                    city: "Surabaya",
-                    country: "Indonesia"
-                },
-                client: {
-                    company: user.UserDetail.name,
-                    phoneNumber: user.UserDetail.phoneNumber,
-                    address: user.UserDetail.address,
-                    zip: 'SBY-06',
-                    city: user.UserDetail.City.name,
-                    country: "Indonesia"
-                },
-                information: {
-                    // Invoice number
-                    number: "2021.0001",
-                    // Invoice data
-                    date: "12-12-2021",
-                    // Invoice due date
-                    dueDate: "31-12-2021"
-                },
-                products: [
-                    {
-                        quantity: 1,
-                        description: product.name,
-                        price: product.price
+            await generateInvoice(user.UserDetail.name, user.UserDetail.phoneNumber, 
+                user.UserDetail.address, user.UserDetail.City.name, 
+                product.name, product.price, req.session.user.id
+            );
+
+            await Product.decrement({
+                stock: 1
+            },
+            {
+                where: {
+                    id: {
+                        [Op.eq]: productId
                     }
-                ],
-                settings: {
-                    currency: "IDR", // See documentation 'Locales and Currency' for more info. Leave empty for no currency.
-                    locale: "id-ID", // Defaults to en-US, used for number formatting (See documentation 'Locales and Currency')        
-                },
-            };
-            const result = await easyinvoice.createInvoice(data);
-            await writeFile(`./invoices/invoice-${req.session.user.id}-${new Date().getTime()}.pdf`, result.pdf, 'base64');
+                }
+            });
             res.redirect(`/${req.session.user.id}/${req.session.user.role}`)
         } catch (err) {
             res.send(err);
