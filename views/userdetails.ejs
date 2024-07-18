@@ -5,6 +5,12 @@
         <form action="/<%= user.id %>/<%= user.role %>/profile" method="post">
             <div class="pt-3">
                 <label class="input input-bordered flex items-center gap-2">
+                    Name
+                    <input type="text" class="grow" name="name" value="<%= !profile ? '' : profile.name %>"/>
+                </label>
+            </div>
+            <div class="pt-3">
+                <label class="input input-bordered flex items-center gap-2">
                     Phone Number
                     <input type="text" class="grow" name="phoneNumber" value="<%= !profile ? '' : profile.phoneNumber %>"/>
                 </label>

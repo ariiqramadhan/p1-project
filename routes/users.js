@@ -9,5 +9,6 @@ router.get('/profile', UserController.renderProfile);
 router.post('/profile', UserController.handlerProfile);
 router.use('/manageproducts', routerAdmin);
 router.get('/product/:productId', UserController.productDetails);
+router.get('/product/:productId/buy', UserController.buyProduct);
 
 module.exports = router;
