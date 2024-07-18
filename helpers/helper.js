@@ -10,10 +10,13 @@ const formatPrice = input => {
     return formatter.format(input);
 }
 
-const generateInvoice = async (name, phoneNumber, address, city, prodName, prodPrice, id) => {
+const generateInvoice = async (name, phoneNumber, address, city, prodName, prodPrice, randomCode, id) => {
     try {
-        console.log('jalan');
-        const randomCode = new Date().getTime();
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+        const day = String(today.getDate()).padStart(2, '0');
+        const localDate = `${year}-${month}-${day}`;
         const data = {
             apiKey: "free", // Please register to receive a production apiKey: https://app.budgetinvoice.com/register
             mode: "development", // Production or development, defaults to production   
@@ -41,7 +44,7 @@ const generateInvoice = async (name, phoneNumber, address, city, prodName, prodP
                 // Invoice number
                 number: `${new Date().getFullYear()}.${randomCode}`,
                 // Invoice data
-                date: `${new Date().toISOString().split('T')[0]}`,
+                date: `${localDate}`,
             },
             products: [
                 {
@@ -55,9 +58,8 @@ const generateInvoice = async (name, phoneNumber, address, city, prodName, prodP
                 locale: "id-ID",    
             },
         };
-        console.log('jalan');
         const result = await easyinvoice.createInvoice(data);
-        await writeFile(`./invoices/invoice-${id}-${new Date().getTime()}.pdf`, result.pdf, 'base64');
+        await writeFile(`./invoices/invoice-${id}-${randomCode}.pdf`, result.pdf, 'base64');
     } catch (err) {
         throw err;
     }

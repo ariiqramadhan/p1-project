@@ -12,6 +12,9 @@
         <% if (user.role === 'user') { %>
             <a class="btn btn-ghost text-l rounded-lg" href="/<%= user.id %>/<%= user.role %>/profile">Profile</a>
         <% } %>
+        <% if (user.role === 'user') { %>
+            <a class="btn btn-ghost text-l rounded-lg" href="/<%= user.id %>/<%= user.role %>/history">History</a>
+        <% } %>
         <a class="btn btn-ghost text-l rounded-lg" href="/logout">Logout</a>
     </div>
 </div>

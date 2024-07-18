@@ -1,4 +1,4 @@
-const { Product, Category, UserDetail, City, User } = require('../models/index');
+const { Product, Category, UserDetail, City, User, Transaction } = require('../models/index');
 const { formatPrice, generateInvoice } = require('../helpers/helper');
 const { Op } = require('sequelize');
 
@@ -122,13 +122,23 @@ class Controller {
                     }
                 }
             });
+
             if (user.UserDetail === null) {
                 return res.redirect(`/${req.session.user.id}/${req.session.user.role}/profile?error=Please fill in your user details first!`);
             }
+
+            const randomCode = new Date().getTime();
             await generateInvoice(user.UserDetail.formatName, user.UserDetail.phoneNumber, 
                 user.UserDetail.address, user.UserDetail.City.name, 
-                product.name, product.price, req.session.user.id
+                product.name, product.price, randomCode, req.session.user.id
             );
+
+            await Transaction.create({
+                UserId: req.session.user.id,
+                ProductId: productId,
+                quantity: 1,
+                invoiceCode: `${req.session.user.id}-${randomCode}`
+            });
 
             await Product.decrement({
                 stock: 1
@@ -146,13 +156,26 @@ class Controller {
         }
     }
      
-    // static async renderRegister(req, res) {
-    //     try {
-
-    //     } catch (err) {
-    //         res.send(err);
-    //     }
-    // }
+    static async transactionHistory(req, res) {
+        try {
+            const { userId, userRole } = req.params;
+            if (req.session.user.id !== +userId || req.session.user.role !== userRole) {
+                return res.redirect(`/${req.session.user.id}/${req.session.user.role}/history`)
+            }
+            const history = await User.findByPk(req.session.user.id, {
+                include: {
+                    model: Transaction,
+                    include: {
+                        model: Product
+                    }
+                }
+            });
+            res.render('transactionhistory', { history, user: req.session.user });
+        } catch (err) {
+            console.log(err);
+            res.send(err);
+        }
+    }
 }
 
 module.exports = Controller;

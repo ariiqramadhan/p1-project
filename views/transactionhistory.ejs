@@ -1,0 +1,30 @@
+<%- include('./partials/_head.ejs', { title: 'Admin' }) %>
+<body>
+    <%- include('./partials/_nav.ejs', { user }) %>
+    <div class="container mx-auto p-20">
+        <h1 class="text-6xl font-semibold py-10">Transaction History</h1>
+        <div class="overflow-x-auto">
+            <table class="table text-center">
+                <thead>
+                    <tr>
+                    <th>No.</th>
+                    <th>Product Name</th>
+                    <th>Quantity</th>
+                    <th>Invoice Code</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% history.Transactions.forEach((val, i) => { %>
+                        <tr class="hover">
+                        <th><%= i+1 %></th>
+                        <td><%= val.Product.name %></td>
+                        <td><%= val.quantity %></td>
+                        <td><%= val.invoiceCode %></td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
