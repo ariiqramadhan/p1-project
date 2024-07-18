@@ -31,7 +31,12 @@ class Controller {
                 ]
             }
             const products = await Product.findAll(options);
-            res.render('home', { user: req.session.user, products, formatPrice, search });
+            const profile = await UserDetail.findOne({
+                where: {
+                    UserId: req.session.user.id
+                }
+            });
+            res.render('home', { user: req.session.user, products, formatPrice, search, profile });
         } catch (err) {
             res.send(err);
         }

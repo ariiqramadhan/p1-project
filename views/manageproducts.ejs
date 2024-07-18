@@ -3,12 +3,12 @@
     <%- include('./partials/_nav.ejs', { user }) %>
     <div class="container mx-auto p-20">
         <div class="flex gap-2 items-center py-10">
-            <div>
-                <h1 class="text-4xl pb-3 font-semibold">Manage Products</h1>
+            <div class="flex">
+                <h1 class="text-4xl font-bold bg-gradient-to-r from-[#06AFCC] to-[#04CAB8] bg-clip-text text-transparent pb-2">Manage Products</h1>
             </div>
             <div>
                 <a href="/<%= user.id %>/<%= user.role %>/manageproducts/product/add">
-                    <button class="btn btn-sm rounded-full bg-[#f43f5e] text-sky-50 p-1 hover:bg-[#e11d48]">
+                    <button class="btn btn-sm rounded-full bg-[#EA5758] text-sky-50 p-1 hover:bg-[#e11d48]">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                         </svg>                              
@@ -41,7 +41,7 @@
                                 </select>
                             </label>
                         </div>
-                        <button class="btn btn-primary btn-sm" type="submit">Sort</button>
+                        <button class="btn bg-[#04CAB8] text-[#01010D] btn-sm" type="submit">Sort</button>
                     </div>
                 </form>
             </div>

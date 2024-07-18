@@ -27,7 +27,7 @@ class Controller {
                 email,
                 password
             });
-            return res.redirect('login');
+            return res.redirect('/login?reg=Register successful');
         } catch (err) {
             if (err.name === 'SequelizeValidationError') {
                 const errors = err.errors.map(error => error.message);
@@ -41,8 +41,8 @@ class Controller {
 
     static async renderLogin(req, res) {
         try {
-            const { error } = req.query;
-            res.render('login', { error });
+            const { error, reg } = req.query;
+            res.render('login', { error, reg });
         } catch (err) {
             res.send(err);
         }

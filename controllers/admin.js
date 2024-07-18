@@ -122,13 +122,17 @@ class Controller {
                     ProductId: productId
                 }
             });
-            const categories = category.map(val => {
-                return {
-                    CategoryId: val,
-                    ProductId: productId
+            if (category !== undefined) {
+                if (category.length) {
+                    const categories = category.map(val => {
+                        return {
+                            CategoryId: val,
+                            ProductId: productId
+                        }
+                    });
+                    await ProductCategory.bulkCreate(categories);
                 }
-            });
-            await ProductCategory.bulkCreate(categories);
+            }
             res.redirect(`/${req.session.user.id}/${req.session.user.role}/manageproducts`)
         } catch (err) {
             if (err.name === 'SequelizeValidationError') {
