@@ -1,0 +1,60 @@
+<%- include('./partials/_head.ejs', { title: 'Add Product' }) %>
+<body>
+    <div class="container mx-auto p-20">
+        <h1 class="text-4xl pb-3 font-semibold">Add Product</h1>
+        <form action="/<%= user.id %>/<%= user.role %>/manageproducts/product/add" method="post">
+            <div class="pt-3">
+                <label class="input input-bordered flex items-center gap-2">
+                    Product Name
+                    <input type="text" class="grow" name="name" />
+                </label>
+            </div>
+            <div class="pt-3">
+                <label class="input input-bordered flex items-center gap-2">
+                    Stock
+                    <input type="number" class="grow" name="stock" />
+                </label>
+            </div>
+            <div class="pt-3">
+                <label class="input input-bordered flex items-center gap-2">
+                    Price
+                    <input type="number" class="grow" name="price" />
+                </label>
+            </div>
+            <div class="pt-3">
+                <label class="input input-bordered flex items-center gap-2">
+                    Image Url
+                    <input type="text" class="grow" name="imageUrl" />
+                </label>
+            </div>
+            <div class="pt-3">
+                <label class="btn btn-outline btn-sm">Category</label>
+                <div class="pl-5 pb-2">
+                    <fieldset class="grid grid-cols-3 gap-5 pt-2">
+                        <% categories.forEach(val => { %>
+                            <div>
+                                <input type="checkbox" name="category" id="checkbox<%= val.id %>" value="<%= val.id %>">
+                                <label for="checkbox<%= val.id %>" class="pl-3"><%= val.name %></label>
+                            </div>
+                        <% }) %>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="pt-3">
+                <div>
+                    <label class="btn btn-outline btn-sm">Description</label>
+                </div>
+                <div class="pt-2">
+                    <textarea name="description" class="w-96 h-28"></textarea>
+                </div>
+            </div>
+            <div class="pt-3">
+                <button class="btn text-sky-50 bg-[#047857] text-sky-50 hover:bg-[#059669]" type="submit">Add</button>
+                <a href="/<%= user.id %>/<%= user.role %>/manageproducts">
+                    <button class="btn text-sky-50 bg-[#b91c1c] text-sky-50 hover:bg-[#dc2626]" type="button">Cancel</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

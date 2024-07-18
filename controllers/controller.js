@@ -1,7 +1,16 @@
-const { User } = require('../models/index');
+const formatPrice = require('../helpers/helper');
+const { User, Product } = require('../models/index');
 const bcrypt = require('bcryptjs');
 
 class Controller {
+    static async redirectLogin(req, res) {
+        try {
+            res.redirect('/login');
+        } catch (err) {
+            res.send(err);
+        }
+    }
+
     static async renderRegister(req, res) {
         try {
             res.render('register');
@@ -66,13 +75,14 @@ class Controller {
 
     static async home(req, res) {
         try {
-            const { userId } = req.params;
-            if (req.session.user.id !== +userId) {
+            const { userId, userRole } = req.params;
+            if (req.session.user.id !== +userId || req.session.user.role !== userRole) {
                 return res.redirect(`/${req.session.user.id}/${req.session.user.role}`)
             }
+            const products = await Product.findAll();
             switch (req.session.user.role) {
                 case 'admin':
-                    res.render('admin', { user: req.session.user });
+                    res.render('admin', { user: req.session.user, products, formatPrice });
                     break;
                 case 'user':
                     res.render('user', { user: req.session.user });
@@ -85,7 +95,6 @@ class Controller {
 
     static async userAuth(req, res, next) {
         try {
-            console.log(req.session);
             if (!req.session.user) {
                 return res.redirect('/login?error=You must login first!');
             }
@@ -100,9 +109,23 @@ class Controller {
         }
     }
 
-    static async redirectLogin(req, res) {
+    static async logout(req, res) {
         try {
-            res.redirect('/login');
+            req.session.destroy();
+            res.redirect('/login?error=Logout Success');
+        } catch (err) {
+            res.send(err);
+        }
+    }
+
+    static async isAdmin(req, res, next) {
+        try {
+            if (req.session.user.role !== 'admin') {
+                req.session.destroy();
+                return res.redirect('/login?error=You have no access!');
+            } else {
+                next();
+            }
         } catch (err) {
             res.send(err);
         }

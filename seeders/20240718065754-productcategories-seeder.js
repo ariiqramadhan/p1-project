@@ -2,7 +2,7 @@
 const { readFile } = require('fs').promises;
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
-  async up(queryInterface, Sequelize) {
+  async up (queryInterface, Sequelize) {
     /**
      * Add seed commands here.
      *
@@ -12,21 +12,22 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-    const data = JSON.parse(await readFile('./data/admin.json', 'utf8'));
+    const data = JSON.parse(await readFile('./data/productcategories.json', 'utf8'));
     data.forEach(val => {
+      delete val.id;
       val.createdAt = new Date();
       val.updatedAt = new Date();
     });
-    await queryInterface.bulkInsert('Users', data);
+    await queryInterface.bulkInsert('ProductCategories', data);
   },
 
-  async down(queryInterface, Sequelize) {
+  async down (queryInterface, Sequelize) {
     /**
      * Add commands to revert seed here.
      *
      * Example:
      * await queryInterface.bulkDelete('People', null, {});
      */
-    await queryInterface.bulkDelete('Users', null);
+    await queryInterface.bulkDelete('ProductCategories', null);
   }
 };

@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Electronics"
+    },
+    {
+        "id": 2,
+        "name": "Home Appliances"
+    },
+    {
+        "id": 3,
+        "name": "Books"
+    },
+    {
+        "id": 4,
+        "name": "Clothing"
+    },
+    {
+        "id": 5,
+        "name": "Sports Equipment"
+    },
+    {
+        "id": 6,
+        "name": "Toys"
+    },
+    {
+        "id": 7,
+        "name": "Beauty Products"
+    },
+    {
+        "id": 8,
+        "name": "Furniture"
+    },
+    {
+        "id": 9,
+        "name": "Groceries"
+    },
+    {
+        "id": 10,
+        "name": "Pet Supplies"
+    }
+]

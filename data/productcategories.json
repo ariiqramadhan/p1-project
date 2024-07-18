@@ -1,0 +1,152 @@
+[
+    {
+        "id": 1,
+        "ProductId": 1,
+        "CategoryId": 1
+    },
+    {
+        "id": 2,
+        "ProductId": 2,
+        "CategoryId": 2
+    },
+    {
+        "id": 3,
+        "ProductId": 3,
+        "CategoryId": 3
+    },
+    {
+        "id": 4,
+        "ProductId": 4,
+        "CategoryId": 4
+    },
+    {
+        "id": 5,
+        "ProductId": 5,
+        "CategoryId": 5
+    },
+    {
+        "id": 6,
+        "ProductId": 1,
+        "CategoryId": 6
+    },
+    {
+        "id": 7,
+        "ProductId": 2,
+        "CategoryId": 7
+    },
+    {
+        "id": 8,
+        "ProductId": 3,
+        "CategoryId": 8
+    },
+    {
+        "id": 9,
+        "ProductId": 4,
+        "CategoryId": 9
+    },
+    {
+        "id": 10,
+        "ProductId": 5,
+        "CategoryId": 10
+    },
+    {
+        "id": 11,
+        "ProductId": 1,
+        "CategoryId": 2
+    },
+    {
+        "id": 12,
+        "ProductId": 2,
+        "CategoryId": 3
+    },
+    {
+        "id": 13,
+        "ProductId": 3,
+        "CategoryId": 4
+    },
+    {
+        "id": 14,
+        "ProductId": 4,
+        "CategoryId": 5
+    },
+    {
+        "id": 15,
+        "ProductId": 5,
+        "CategoryId": 1
+    },
+    {
+        "id": 16,
+        "ProductId": 1,
+        "CategoryId": 7
+    },
+    {
+        "id": 17,
+        "ProductId": 2,
+        "CategoryId": 8
+    },
+    {
+        "id": 18,
+        "ProductId": 3,
+        "CategoryId": 9
+    },
+    {
+        "id": 19,
+        "ProductId": 4,
+        "CategoryId": 10
+    },
+    {
+        "id": 20,
+        "ProductId": 5,
+        "CategoryId": 6
+    },
+    {
+        "id": 21,
+        "ProductId": 1,
+        "CategoryId": 8
+    },
+    {
+        "id": 22,
+        "ProductId": 2,
+        "CategoryId": 9
+    },
+    {
+        "id": 23,
+        "ProductId": 3,
+        "CategoryId": 10
+    },
+    {
+        "id": 24,
+        "ProductId": 4,
+        "CategoryId": 1
+    },
+    {
+        "id": 25,
+        "ProductId": 5,
+        "CategoryId": 2
+    },
+    {
+        "id": 26,
+        "ProductId": 1,
+        "CategoryId": 3
+    },
+    {
+        "id": 27,
+        "ProductId": 2,
+        "CategoryId": 4
+    },
+    {
+        "id": 28,
+        "ProductId": 3,
+        "CategoryId": 5
+    },
+    {
+        "id": 29,
+        "ProductId": 4,
+        "CategoryId": 6
+    },
+    {
+        "id": 30,
+        "ProductId": 5,
+        "CategoryId": 7
+    }
+]

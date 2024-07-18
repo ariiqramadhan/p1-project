@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Whisker Delight",
+        "description": "This is the description for Whisker Delight.",
+        "stock": 150,
+        "price": 25000,
+        "imageUrl": "https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "id": 2,
+        "name": "Pawsome Treat",
+        "description": "This is the description for Pawsome Treat.",
+        "stock": 220,
+        "price": 35000,
+        "imageUrl": "https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "id": 3,
+        "name": "Feline Fantasy",
+        "description": "This is the description for Feline Fantasy.",
+        "stock": 80,
+        "price": 45000,
+        "imageUrl": "https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "id": 4,
+        "name": "Meow Mix",
+        "description": "This is the description for Meow Mix.",
+        "stock": 175,
+        "price": 20000,
+        "imageUrl": "https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
+    },
+    {
+        "id": 5,
+        "name": "Catnip Joy",
+        "description": "This is the description for Catnip Joy.",
+        "stock": 190,
+        "price": 30000,
+        "imageUrl": "https://images.unsplash.com/photo-1608848461950-0fe51dfc41cb?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxleHBsb3JlLWZlZWR8MXx8fGVufDB8fHx8fA%3D%3D"
+    }
+]
