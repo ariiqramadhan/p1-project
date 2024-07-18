@@ -3,6 +3,33 @@
     <%- include('./partials/_nav.ejs', { user }) %>
     <div class="container mx-auto p-20">
         <h1 class="text-6xl font-semibold py-10">Products</h1>
+        <div class="flex gap-2 items-center pb-3 justify-between">
+            <div>
+                <form action="/<%= user.id %>/<%= user.role %>">
+                        <label class="input input-sm input-bordered flex items-center gap-2">
+                            Search
+                            <input type="text" class="grow" name="search" value="<%= search ? search : '' %>"/>
+                        </label>
+                </form>
+            </div>
+            <div>
+                <form action="/<%= user.id %>/<%= user.role %>">
+                    <div class="flex items-center gap-2">
+                        <div>
+                            <label class="input input-bordered flex items-center gap-2">
+                                Sort
+                                <select name="sortPrice" class="select w-full block bg-transparent focus:outline-none focus:border-none">
+                                    <option disabled selected>Sort Price</option>
+                                    <option value="DESC">Price High to Low</option>
+                                    <option value="ASC">Price Low to High</option>
+                                </select>
+                            </label>
+                        </div>
+                        <button class="btn btn-primary btn-sm" type="submit">Sort</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="flex gap-10 flex-wrap pt-5"> 
             <% products.forEach(val => { %>
                     <div class="card card-compact bg-[#f1f5f9] w-64 shadow-xl rounded-lg">

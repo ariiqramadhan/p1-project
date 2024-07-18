@@ -8,8 +8,9 @@ class Controller {
             if (req.session.user.id !== +userId || req.session.user.role !== userRole) {
                 return res.redirect(`/${req.session.user.id}/${req.session.user.role}/manageproducts`)
             }
-            const products = await Product.findAll();
-            res.render('manageproducts', { products, user: req.session.user, formatPrice });
+            const { sortStock, search, message } = req.query;
+            const products = await Product.getSortedStock(sortStock, search);
+            res.render('manageproducts', { products, user: req.session.user, formatPrice, search, message });
         } catch (err) {
             res.send(err);
         }
@@ -18,6 +19,7 @@ class Controller {
     static async deleteProduct(req, res) {
         try {
             const { productId } = req.params;
+            const { name } = await Product.findByPk(productId);
             await Product.destroy({
                 where: {
                     id: productId
@@ -28,7 +30,7 @@ class Controller {
                     ProductId: productId
                 }
             });
-            res.redirect(`/${req.session.user.id}/${req.session.user.role}/manageproducts`);
+            res.redirect(`/${req.session.user.id}/${req.session.user.role}/manageproducts?message=${name}`);
         } catch (err) {
             res.send(err);
         }
@@ -41,7 +43,8 @@ class Controller {
                 return res.redirect(`/${req.session.user.id}/${req.session.user.role}/manageproducts/product/add`);
             }
             const categories = await Category.findAll();
-            res.render('addproduct', { user: req.session.user, categories });
+            const { error } = req.query;
+            res.render('addproduct', { user: req.session.user, categories, error });
         } catch (err) {
             res.send(err);
         }
@@ -57,16 +60,25 @@ class Controller {
                 price,
                 imageUrl
             });
-            const categories = category.map(val => {
-                return {
-                    CategoryId: val,
-                    ProductId: id
+            if (category !== undefined) {
+                if (category.length) {
+                    const categories = category.map(val => {
+                        return {
+                            CategoryId: val,
+                            ProductId: id
+                        }
+                    });
+                    await ProductCategory.bulkCreate(categories);
                 }
-            });
-            await ProductCategory.bulkCreate(categories);
+            }
             res.redirect(`/${req.session.user.id}/${req.session.user.role}/manageproducts`);
         } catch (err) {
-            res.send(err);
+            if (err.name === 'SequelizeValidationError') {
+                const errors = err.errors.map(error => error.message);
+                res.redirect(`/${req.session.user.id}/${req.session.user.role}/manageproducts/product/add?error=${errors}`);
+            }  else {
+                res.send(err);
+            }
         }
     }
     
@@ -81,8 +93,9 @@ class Controller {
                     model: Category
                 }
             });
+            const { error } = req.query;
             const categories = await Category.findAll();
-            res.render('editproduct', { product, user: req.session.user, categories });
+            res.render('editproduct', { product, user: req.session.user, categories, error });
         } catch (err) {
             res.send(err);
         }
@@ -118,8 +131,13 @@ class Controller {
             await ProductCategory.bulkCreate(categories);
             res.redirect(`/${req.session.user.id}/${req.session.user.role}/manageproducts`)
         } catch (err) {
-            console.log(err);
-            res.send(err);
+            if (err.name === 'SequelizeValidationError') {
+                const { productId } = req.params;
+                const errors = err.errors.map(error => error.message);
+                res.redirect(`/${req.session.user.id}/${req.session.user.role}/manageproducts/product/${productId}/edit?error=${errors}`);
+            }  else {
+                res.send(err);
+            }
         }
     }
     

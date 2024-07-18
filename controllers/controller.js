@@ -13,7 +13,8 @@ class Controller {
 
     static async renderRegister(req, res) {
         try {
-            res.render('register');
+            const { error } = req.query;
+            res.render('register', { error });
         } catch (err) {
             res.send(err);
         }
@@ -28,7 +29,13 @@ class Controller {
             });
             return res.redirect('login');
         } catch (err) {
-            res.send(err);
+            if (err.name === 'SequelizeValidationError') {
+                const errors = err.errors.map(error => error.message);
+                res.redirect(`/register?error=${errors}`);
+            } else if (err.name === 'SequelizeUniqueConstraintError') {
+                const errors = err.errors.map(error => error.message);
+                res.redirect(`/register?error=${errors}`);
+            }
         }
     }
 
@@ -111,13 +118,17 @@ class Controller {
         }
     }
 
-    // static async renderRegister(req, res) {
-    //     try {
-
-    //     } catch (err) {
-    //         res.send(err);
-    //     }
-    // }
+    static async isUser(req, res, next) {
+        try {
+            if (req.session.user.role !== 'user') {
+                return res.redirect(`/${req.session.user.id}/${req.session.user.role}`)
+            } else {
+                next();
+            }
+        } catch (err) {
+            res.send(err);
+        }
+    }
 }
 
 module.exports = Controller;

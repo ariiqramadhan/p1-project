@@ -9,7 +9,7 @@ class Controller {
             if (req.session.user.id !== +userId || req.session.user.role !== userRole) {
                 return res.redirect(`/${req.session.user.id}/${req.session.user.role}`)
             }
-            const products = await Product.findAll({
+            const options = {
                 order: [
                     ['id']
                 ],
@@ -18,8 +18,20 @@ class Controller {
                         [Op.gt]: 0
                     }
                 }
-            });
-            res.render('home', { user: req.session.user, products, formatPrice });
+            };
+            const { search, sortPrice } = req.query;
+            if (search) {
+                options.where.name = {
+                    [Op.iLike]: `%${search}%`
+                }
+            }
+            if (sortPrice) {
+                options.order = [
+                    ['price', sortPrice]
+                ]
+            }
+            const products = await Product.findAll(options);
+            res.render('home', { user: req.session.user, products, formatPrice, search });
         } catch (err) {
             res.send(err);
         }
@@ -53,8 +65,9 @@ class Controller {
                     UserId: req.session.user.id
                 }
             });
+            const { error } = req.query;
             const cities = await City.findAll();
-            res.render('userdetails', { profile, user: req.session.user, cities });
+            res.render('userdetails', { profile, user: req.session.user, cities, error });
         } catch (err) {
             res.send(err);
         }
@@ -109,7 +122,10 @@ class Controller {
                     }
                 }
             });
-            await generateInvoice(user.UserDetail.name, user.UserDetail.phoneNumber, 
+            if (user.UserDetail === null) {
+                return res.redirect(`/${req.session.user.id}/${req.session.user.role}/profile?error=Please fill in your user details first!`);
+            }
+            await generateInvoice(user.UserDetail.formatName, user.UserDetail.phoneNumber, 
                 user.UserDetail.address, user.UserDetail.City.name, 
                 product.name, product.price, req.session.user.id
             );

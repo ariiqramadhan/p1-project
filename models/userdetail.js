@@ -9,6 +9,15 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+
+    get formatName() {
+      if (this.gender === 'Male') {
+        return `Mr. ${this.name}`
+      } else {
+        return `Mrs. ${this.name}`
+      }
+    }
+
     static associate(models) {
       // define association here
       UserDetail.belongsTo(models.User);

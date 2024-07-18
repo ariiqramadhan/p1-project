@@ -16,6 +16,36 @@
                 </a>
             </div>
         </div>
+        <% if (message) { %>
+            <h1 class="text-l pb-5 text-red-500">Success Deleting Product <%= message %></h1>
+        <% } %>
+        <div class="flex gap-2 items-center pb-3 justify-between">
+            <div>
+                <form action="/<%= user.id %>/<%= user.role %>/manageproducts">
+                        <label class="input input-sm input-bordered flex items-center gap-2">
+                            Search
+                            <input type="text" class="grow" name="search" value="<%= search ? search : '' %>"/>
+                        </label>
+                </form>
+            </div>
+            <div>
+                <form action="/<%= user.id %>/<%= user.role %>/manageproducts">
+                    <div class="flex items-center gap-2">
+                        <div>
+                            <label class="input input-bordered flex items-center gap-2">
+                                Sort
+                                <select name="sortStock" class="select w-full block bg-transparent focus:outline-none focus:border-none">
+                                    <option disabled selected>Sort Stock</option>
+                                    <option value="DESC">Stock High to Low</option>
+                                    <option value="ASC">Stock Low to High</option>
+                                </select>
+                            </label>
+                        </div>
+                        <button class="btn btn-primary btn-sm" type="submit">Sort</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="overflow-x-auto">
             <table class="table text-center">
               <thead>
