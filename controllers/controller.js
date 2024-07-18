@@ -17,7 +17,7 @@ class Controller {
                 email,
                 password
             });
-            res.redirect('login');
+            return res.redirect('login');
         } catch (err) {
             res.send(err);
         }
@@ -47,12 +47,15 @@ class Controller {
             });
 
             if (!data) {
-                const error = 'Invlaid Email/Password'
-                return res.redirect(`/login?error=${error}`);
+                return res.redirect(`/login?error=Invlaid Email/Password`);
             }
 
             if (bcrypt.compareSync(password, data.password)) {
-                return res.redirect('/');
+                req.session.user = {
+                    id: data.id,
+                    role: data.role
+                };
+                return res.redirect(`/${req.session.user.id}/${req.session.user.role}`);
             } else {
                 return res.redirect('/login?error=Invalid Email/Password');
             }
@@ -61,21 +64,49 @@ class Controller {
         }
     }
 
-    static async test(req, res) {
+    static async home(req, res) {
         try {
-            res.render('home');
+            const { userId } = req.params;
+            if (req.session.user.id !== +userId) {
+                return res.redirect(`/${req.session.user.id}/${req.session.user.role}`)
+            }
+            switch (req.session.user.role) {
+                case 'admin':
+                    res.render('admin', { user: req.session.user });
+                    break;
+                case 'user':
+                    res.render('user', { user: req.session.user });
+                    break;
+            }
         } catch (err) {
             res.send(err);
         }
     }
 
-    // static async renderRegister(req, res) {
-    //     try {
+    static async userAuth(req, res, next) {
+        try {
+            console.log(req.session);
+            if (!req.session.user) {
+                return res.redirect('/login?error=You must login first!');
+            }
+        
+            if (!req.session.user.id) {
+                return res.redirect('/login?error=You must login first!');
+            } else {
+                next();
+            }
+        } catch (err) {
+            res.send(err);
+        }
+    }
 
-    //     } catch (err) {
-    //         res.send(err);
-    //     }
-    // }
+    static async redirectLogin(req, res) {
+        try {
+            res.redirect('/login');
+        } catch (err) {
+            res.send(err);
+        }
+    }
 
     // static async renderRegister(req, res) {
     //     try {

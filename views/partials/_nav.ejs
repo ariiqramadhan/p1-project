@@ -1,0 +1,13 @@
+<div class="navbar bg-base-100 flex justify-between text-[#ffffff]">
+    <div class="pl-4">
+        <div class="w-[16px] h-[16px] bg-gradient-to-br from-[#06AFCC] to-[#04CAB8]"></div>
+        <% const role = userRole ? userRole : '' %>
+        <a class="text-xl font-semibold pl-2 select-none cursor-default">Toko Kocak <%= role %></a>
+    </div>
+    <div>
+        <a class="btn btn-ghost text-l rounded-lg" href="/incubators">Home</a>
+        <% if (user.role === 'admin') { %>
+            <a class="btn btn-ghost text-l rounded-lg" href="/">Manage Products</a>
+        <% } %>
+    </div>
+</div>

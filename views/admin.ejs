@@ -1,6 +1,6 @@
-<%- include('./partials/_head.ejs', { title: 'Home' }) %>
+<%- include('./partials/_head.ejs', { title: 'Admin' }) %>
 <body>
-    <%- include('./partials/_nav.ejs') %>
+    <%- include('./partials/_nav.ejs', { userRole: 'Admin', user }) %>
     <div class="container mx-auto p-20">
         <h1 class="text-6xl font-semibold py-10">MASUK</h1>
     </div>
