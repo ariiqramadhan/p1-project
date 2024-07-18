@@ -1,0 +1,26 @@
+<%- include('./partials/_head.ejs', { title: `Product ${product.id} Details` }) %>
+<body>
+    <%- include('./partials/_nav.ejs', { user }) %>
+    <div class="container mx-auto p-20 flex flex-col items-center">
+        <div>
+            <h1 class="text-4xl font-semibold"><%= product.name %></h1>
+        </div>
+        <div class="pt-3">
+            <img src="<%= product.imageUrl %>" alt="" class="h-[500px]">
+        </div>
+        <div class="pt-3 w-1/2">
+            <h1 class="text-l">Price: <%= formatPrice(product.price) %></h1>
+            <h1 class="text-l">Stock: <%= product.stock %></h1>
+            <% let prodCategory = '' %>
+            <% if (product.Categories.length) { %>
+                <% product.Categories.forEach((val, i) => { %>
+                    <% product.Categories[i] = val.name %>
+                <% }) %>
+                <% prodCategory = product.Categories.join(', ') %>
+            <% } %>
+            <h1 class="text-l">Categories: <%= prodCategory %></h1>
+            <h1 class="text-l">Description: <%= product.description %></h1>
+        </div>
+    </div>
+</body>
+</html>

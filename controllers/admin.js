@@ -24,6 +24,11 @@ class Controller {
                     id: productId
                 }
             });
+            await ProductCategory.destroy({
+                where: {
+                    ProductId: productId
+                }
+            });
             res.redirect(`/${req.session.user.id}/${req.session.user.role}/manageproducts`)
         } catch (err) {
             res.send(err);
