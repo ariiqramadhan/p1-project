@@ -1,0 +1,102 @@
+[
+    {
+        "id": 1,
+        "name": "Jakarta"
+    },
+    {
+        "id": 2,
+        "name": "Surabaya"
+    },
+    {
+        "id": 3,
+        "name": "Bandung"
+    },
+    {
+        "id": 4,
+        "name": "Medan"
+    },
+    {
+        "id": 5,
+        "name": "Bekasi"
+    },
+    {
+        "id": 6,
+        "name": "Depok"
+    },
+    {
+        "id": 7,
+        "name": "Tangerang"
+    },
+    {
+        "id": 8,
+        "name": "Semarang"
+    },
+    {
+        "id": 9,
+        "name": "Palembang"
+    },
+    {
+        "id": 10,
+        "name": "South Tangerang"
+    },
+    {
+        "id": 11,
+        "name": "Makassar"
+    },
+    {
+        "id": 12,
+        "name": "Batam"
+    },
+    {
+        "id": 13,
+        "name": "Pekanbaru"
+    },
+    {
+        "id": 14,
+        "name": "Bogor"
+    },
+    {
+        "id": 15,
+        "name": "Bandar Lampung"
+    },
+    {
+        "id": 16,
+        "name": "Padang"
+    },
+    {
+        "id": 17,
+        "name": "Malang"
+    },
+    {
+        "id": 18,
+        "name": "Denpasar"
+    },
+    {
+        "id": 19,
+        "name": "Samarinda"
+    },
+    {
+        "id": 20,
+        "name": "Tasikmalaya"
+    },
+    {
+        "id": 21,
+        "name": "Pontianak"
+    },
+    {
+        "id": 22,
+        "name": "Manado"
+    },
+    {
+        "id": 23,
+        "name": "Yogyakarta"
+    },
+    {
+        "id": 24,
+        "name": "Balikpapan"
+    },
+    {
+        "id": 25,
+        "name": "Cimahi"
+    }
+]

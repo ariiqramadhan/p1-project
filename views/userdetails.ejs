@@ -1,0 +1,50 @@
+<%- include('./partials/_head.ejs', { title: `User ${user.id} Details` }) %>
+<body>
+    <div class="container mx-auto p-20">
+        <h1 class="text-4xl pb-3 font-semibold">User Profile</h1>
+        <form action="/<%= user.id %>/<%= user.role %>/profile" method="post">
+            <div class="pt-3">
+                <label class="input input-bordered flex items-center gap-2">
+                    Phone Number
+                    <input type="text" class="grow" name="phoneNumber" value="<%= !profile ? '' : profile.phoneNumber %>"/>
+                </label>
+            </div>
+            <div class="pt-3">
+                <label class="input input-bordered flex items-center gap-2">
+                    Gender
+                    <select name="gender" class="select w-full block bg-transparent focus:outline-none focus:border-none">
+                        <% const whatGender = !profile ? '' : profile.gender %>
+                        <option selected disabled>Choose One!</option>
+                        <option value="Male" <%= whatGender === 'Male' ? 'selected' : '' %>>Male</option>
+                        <option value="Female" <%= whatGender === 'Female' ? 'selected' : '' %>>Female</option>
+                    </select>
+                </label>
+            </div>
+            <div class="pt-3">
+                <label class="input input-bordered flex items-center gap-2">
+                    Address
+                    <input type="text" class="grow" name="address" value="<%= !profile ? '' : profile.address %>"/>
+                </label>
+            </div>
+            <div class="pt-3">
+                <label class="input input-bordered flex items-center gap-2">
+                    City
+                    <select name="CityId" class="select w-full block bg-transparent focus:outline-none focus:border-none">
+                        <% const whatCity = !profile ? '' : profile.CityId %>
+                        <option selected disabled>Choose One!</option>
+                        <% cities.forEach(val => { %>
+                            <option value="<%= val.id %>" <%= whatCity === val.id ? 'selected' : '' %>><%= val.name %></option>
+                        <% }) %>
+                    </select>
+                </label>
+            </div>
+            <div class="pt-3">
+                <button class="btn text-sky-50 bg-[#047857] text-sky-50 hover:bg-[#059669]" type="submit">Save</button>
+                <a href="/<%= user.id %>/<%= user.role %>">
+                    <button class="btn text-sky-50 bg-[#b91c1c] text-sky-50 hover:bg-[#dc2626]" type="button">Cancel</button>
+                </a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

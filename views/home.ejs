@@ -1,8 +1,37 @@
 <%- include('./partials/_head.ejs', { title: 'Home' }) %>
 <body>
-    <%- include('./partials/_nav.ejs') %>
+    <%- include('./partials/_nav.ejs', { user }) %>
     <div class="container mx-auto p-20">
-        <h1 class="text-6xl font-semibold py-10">MASUK</h1>
+        <h1 class="text-6xl font-semibold py-10">Products</h1>
+        <div class="flex gap-10 flex-wrap pt-5"> 
+            <% products.forEach(val => { %>
+                    <div class="card card-compact bg-[#f1f5f9] w-64 shadow-xl rounded-lg">
+                        <figure class="h-[130px]">
+                            <img src="<%= val.imageUrl %>"/>
+                        </figure>
+                        <div class="card-body">
+                            <div>
+                                <h2 class="card-title text-base font-bold"><%= val.name %></h2>
+                                <p class="text-sm font-semibold"><%= formatPrice(val.price) %></p>
+                                <p class="text-sm font-semibold">Stock: <%= val.stock %></p>
+                            </div>
+                            <div>
+                                <p><%= val.description %></p>
+                            </div>
+                            <div class="card-actions justify-end pt-3">
+                                <a href="/<%= user.id %>/<%= user.role %>/product/<%= val.id %>">
+                                    <button class="btn btn-sm btn-primary w-16 text-sky-50">Details</button>
+                                </a>
+                                <% if (user.role === 'user') { %>
+                                    <a href="/<%= user.id %>/<%= user.role %>/product/<%= val.id %>">
+                                        <button class="btn btn-sm btn-primary w-16 text-sky-50">Buy</button>
+                                    </a>
+                                <% } %>
+                            </div>
+                        </div>
+                    </div>
+            <% }) %>
+        </div>
     </div>
 </body>
 </html>

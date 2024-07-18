@@ -9,6 +9,9 @@
         <% if (user.role === 'admin') { %>
             <a class="btn btn-ghost text-l rounded-lg" href="/<%= user.id %>/<%= user.role %>/manageproducts">Manage Products</a>
         <% } %>
+        <% if (user.role === 'user') { %>
+            <a class="btn btn-ghost text-l rounded-lg" href="/<%= user.id %>/<%= user.role %>/profile">Profile</a>
+        <% } %>
         <a class="btn btn-ghost text-l rounded-lg" href="/logout">Logout</a>
     </div>
 </div>
