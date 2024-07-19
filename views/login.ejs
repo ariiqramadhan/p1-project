@@ -1,46 +1,47 @@
 <%- include('./partials/_head.ejs', { title: 'Login' }) %>
 
   <body>
-    <div class="container mx-auto p-20 items-center">
-      <div class="hero bg-base-200 rounded-lg">
-        <div class="hero-content flex-col lg:flex-row-reverse">
-          <div class="text-center lg:text-left">
-            <h1 class="text-5xl font-bold">Welcome to Toko Kocak!</h1>
-            <p class="py-6">
-              We provide you with all kind of products. If you don't see some products, maybe you aint looking in our
-              website!
-            </p>
-          </div>
-          <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form class="card-body" action="/login" method="post">
-              <div class="form-control">
-                <label class="label">
-                  <span class="label-text">Email</span>
-                </label>
-                <input type="text" placeholder="email" class="input input-bordered" name="email" />
-              </div>
-              <div class="form-control">
-                <label class="label">
-                  <span class="label-text">Password</span>
-                </label>
-                <input type="password" placeholder="password" class="input input-bordered" name="password" />
-                <label class="label">
-                  <a href="/register" class="label-text-alt link link-hover">Don't have an account?</a>
-                </label>
-              </div>
-              <div class="form-control mt-6">
-                <button class="btn btn-primary" type="submit">Login</button>
-              </div>
-            </form>
+    <div class="h-screen flex items-center justify-center">
+      <div class="container mx-auto p-20 items-center">
+        <div class="hero bg-base-200 rounded-lg">
+          <div class="hero-content flex-col lg:flex-row-reverse">
+            <div class="text-center lg:text-left">
+              <h1 class="text-5xl font-bold">Welcome to <span class="font-bold bg-gradient-to-r from-[#06AFCC] to-[#04CAB8] bg-clip-text text-transparent italic">Toko Kocak.</span></h1>
+              <p class="py-6">
+                We've got everything under the sun. If you can't find it, those other sites must have hidden it from you!
+              </p>
+            </div>
+            <div class="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
+              <form class="card-body" action="/login" method="post">
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Email</span>
+                  </label>
+                  <input type="text" placeholder="email" class="input input-bordered" name="email" />
+                </div>
+                <div class="form-control">
+                  <label class="label">
+                    <span class="label-text">Password</span>
+                  </label>
+                  <input type="password" placeholder="password" class="input input-bordered" name="password" />
+                  <label class="label">
+                    <a href="/register" class="label-text-alt link link-hover">Don't have an account?</a>
+                  </label>
+                </div>
+                <div class="form-control mt-6">
+                  <button class="btn bg-[#04CAB8] text-[#01010D]" type="submit">Login</button>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
+        <% if (error) { %>
+          <p class="text-red-600 pb-2">*<%= error %></p>
+        <% } %>
+        <% if (reg) { %>
+          <p class="text-[#0EB053] pb-2">*<%= reg %></p>
+        <% } %>
       </div>
-      <% if (error) { %>
-        <p class="text-red-600 pb-2">*<%= error %></p>
-      <% } %>
-      <% if (reg) { %>
-        <p class="text-[#0EB053] pb-2">*<%= reg %></p>
-      <% } %>
     </div>
   </body>
 

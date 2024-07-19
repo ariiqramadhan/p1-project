@@ -1,7 +1,7 @@
 <%- include('./partials/_head.ejs', { title: 'Add Product' }) %>
 <body>
     <div class="container mx-auto p-20">
-        <h1 class="text-4xl pb-3 font-semibold">Add Product</h1>
+        <h1 class="text-4xl pb-3 font-semibold text-[#04CAB8]">Add Product</h1>
         <% if (error) { %>
             <% errors = error.split(',').join(', ') %>
             <p class="text-red-600 pb-2"><%= errors %></p>

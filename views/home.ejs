@@ -3,9 +3,11 @@
     <%- include('./partials/_nav.ejs', { user }) %>
     <% const greet = !profile ? 'Guest' : profile.formatName %>
     <div class="container mx-auto p-20">
-        <h1 class="font-medium text-xl italic">Welcome, <%= greet %>!</h1>
+        <h1 class="font-medium text-xl italic select-none cursor-default">Welcome, <%= greet %>!</h1>
         <div class="flex">
-            <h1 class="text-6xl font-bold pb-5 bg-gradient-to-r from-[#06AFCC] to-[#04CAB8] bg-clip-text text-transparent">Products</h1>
+            <h1 class="text-6xl font-bold pb-5 bg-gradient-to-r from-[#06AFCC] to-[#04CAB8] bg-clip-text text-transparent select-none cursor-default">
+                Products
+            </h1>
         </div>
         <div class="flex gap-2 items-center pb-3 justify-between">
             <div>
